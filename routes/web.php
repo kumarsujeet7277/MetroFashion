@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\http\Controllers\DetailController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +27,10 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('/admin/detail',[DetailController::class, 'index'])->name('profile.detail');
+    Route::post('/admin/detail/update', [DetailController::class, 'store'])->name('insert');
+    // Route::get('/admin/detail/update')
+    
+
 });
