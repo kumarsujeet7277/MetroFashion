@@ -8,6 +8,10 @@
 
         <!-- Fonts -->
         <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
         <!-- Styles -->
         <style>
@@ -25,7 +29,7 @@
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 underline">Dashboard</a>
+                        <a href="{{ route('dashboard', [ Auth::user()->mobile_no]) }}" class="text-sm text-gray-700 underline">Dashboard</a>
                     @else
                         <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Log in</a>
 
@@ -36,7 +40,7 @@
                 </div>
             @endif
 
-            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
+            <!-- <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
                 <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
                     <svg viewBox="0 0 651 192" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-16 w-auto text-gray-700 sm:h-20">
                         <g clip-path="url(#clip0)" fill="#EF3B2D">
@@ -126,7 +130,40 @@
                         Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
                     </div>
                 </div>
+            </div> -->
+
+            <div>
+                <div class="container" style="padding: 30px 0;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Profile
+                                </div>
+                                <div class="panel-body">
+                                    <div class="col-md-4">
+                                        @if ($details->detail->image)
+                                            <img src="/storage/details/{{ $details->detail->image }}" width="50%" />
+                                        @else
+                                            <img src="#" width="100%" />
+                                        @endif
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p><b>Name :</b>  {{ $details->name }}  </p>
+                                        <p><b>Email :</b>  {{ $details->email}} </p>
+                                        <p><b>Phone :</b>  {{ $details->mobile_no }} </p>
+                                        <hr/>
+                                        <p><b>Address :</b>  {{ $details->detail->address }} </p>
+                                    <a href="#" class="btn btn-info pull-right">Update Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                  
+                </div>
             </div>
+        </div>
+
+
         </div>
     </body>
 </html>

@@ -7,16 +7,13 @@
 
 
     <div>
-    <form method="POST" action="{{ route('insert') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('insert', [Auth::user()->mobile_no]) }}" enctype="multipart/form-data">
             @csrf
 
             @if(Session::has('message'))
                 <p class="alert alert-info">{{ Session::get('message') }}</p>
             @endif
-            <div>
-                <x-label for="phone_no" value="{{ __('Phone No') }}" />
-                <x-input id="phone_no" class="block mt-1 w-full" type="number" name="phone_no" value="{{$details->phone_no}}" required autofocus autocomplete="phone_no" />
-            </div>
+            
 
             <div class="mt-4">
                 <x-label for="address" value="{{ __('Address') }}" />
@@ -25,7 +22,7 @@
 
             <div class="mt-4">
                 <x-label for="image" value="{{ __('Password') }}" />
-                <x-input id="image" class="block mt-1 w-full" type="file" name="image" required autocomplete="image" />
+                <x-input id="image" class="block mt-1 w-full" type="file" value="/storage/details/{{ $details->image }}" name="image" required autocomplete="image" />
                 @if ("/storage/details/{{ $details->image }}")
                     <img src="/storage/details/{{ $details->image }}" height="150px" width="150px" style="border: 1px solid blue;">
                 @else

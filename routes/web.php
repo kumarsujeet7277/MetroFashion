@@ -15,21 +15,25 @@ use App\http\Controllers\DetailController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+
+Route::get('/', [DetailController::class, 'show'])->name('detail');
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
+    Route::get('{mobile_no?}/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('/admin/detail',[DetailController::class, 'index'])->name('profile.detail');
-    Route::post('/admin/detail/update', [DetailController::class, 'store'])->name('insert');
+    Route::get('/{mobile_no}/admin/detail',[DetailController::class, 'index'])->name('profile.detail');
+    Route::post('/{mobile_no}/admin/detail/update', [DetailController::class, 'store'])->name('insert');
+    
     // Route::get('/admin/detail/update')
     
 

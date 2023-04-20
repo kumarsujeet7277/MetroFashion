@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('details', function (Blueprint $table) {
             $table->id();
             // $table->string('name');
-            $table->bigInteger('phone_no')->unique();
-            $table->text('address');
+            // $table->bigInteger('phone_no')->unique();
+            $table->text('address')->nullable();
             $table->string('image')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
